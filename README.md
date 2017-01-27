@@ -1,6 +1,12 @@
 # dhondt-calculator
 Simple NodeJS module to calculate mandates using D'Hondt method.
 
+## Install
+
+	```
+		$ npm install dhondt-calculator --save
+	```
+
 ## Usage
 
 ```
