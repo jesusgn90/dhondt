@@ -29,3 +29,17 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
  	*/ 	 
 
 ```
+
+### Params
+
+* __votes__
+	+ Array of integers.
+	+ It is the votes of each party.
+* __names__
+	+ Array of strings.
+	+ The names of the parties.
+* __options__
+	+ Object with three fields
+		+ __mandates__ (integer), the mandates to distribute.
+		+ __blankVotes__ (integer), blank votes.
+		+ __percentage__ (float), barrier percentage.
