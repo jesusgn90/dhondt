@@ -20,14 +20,6 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 		};
 	let result = Dhondt.compute(votes,names,options);
 	console.log(result);
-	/* 
-		{ 
-			numberOfVotes: 43,
-     		minNumberOfVotes: 2,
- 	 		parties: { A: 3, B: 0, C: 0 } 
- 	 	}
- 	*/ 	 
-
 ```
 
 ### Params
@@ -43,3 +35,20 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 		+ __mandates__ (integer), the mandates to distribute.
 		+ __blankVotes__ (integer), blank votes.
 		+ __percentage__ (float), barrier percentage.
+
+### Output
+
+If all went fine it outputs:
+
+```
+	{
+		numberOfVotes: 43,
+    	minNumberOfVotes: 2,
+ 		parties: { A: 3, B: 0, C: 0 } 
+ 	}
+```
+Else:
+
+```
+	An error realated to wrong params.
+```
