@@ -38,7 +38,7 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 
 ### Output
 
-If all went fine it outputs:
+If all went fine with the above example, it outputs:
 
 ```
 	{
