@@ -1,10 +1,10 @@
-# dhondt
+# dhondt-calculator
 Simple NodeJS module to calculate mandates using D'Hondt method.
 
 ## Usage
 
 ```
-	let Dhondt = require('dhondt');
+	let Dhondt = require('dhondt-calculator');
 	let votes = [30,3,9],
 		names = ['A','B','C'];
 		options = {

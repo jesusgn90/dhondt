@@ -3,7 +3,7 @@
 
 /**
  * D'hondt
- * @module dhondt
+ * @module dhondt-calculator
  */
 (function () {
 

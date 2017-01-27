@@ -1,0 +1,25 @@
+{
+  "name": "dhondt",
+  "version": "1.0.0",
+  "description": "Simple module to calculate mandates using D'Hondt method.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesusgn90/dhondt.git"
+  },
+  "keywords": [
+    "dhondt",
+    "math",
+    "mandates",
+    "ellections"
+  ],
+  "author": "Jesús Ángel González Novez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jesusgn90/dhondt/issues"
+  },
+  "homepage": "https://github.com/jesusgn90/dhondt#readme"
+}
