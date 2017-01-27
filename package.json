@@ -1,5 +1,5 @@
 {
-  "name": "dhondt",
+  "name": "dhondt-calculator",
   "version": "1.0.0",
   "description": "Simple module to calculate mandates using D'Hondt method.",
   "main": "main.js",
