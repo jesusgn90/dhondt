@@ -1,6 +1,6 @@
 {
   "name": "dhondt-calculator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple module to calculate mandates using D'Hondt method.",
   "main": "main.js",
   "scripts": {
@@ -11,6 +11,7 @@
     "url": "git+https://github.com/jesusgn90/dhondt.git"
   },
   "keywords": [
+    "ES6",
     "dhondt",
     "math",
     "mandates",
