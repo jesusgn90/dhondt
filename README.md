@@ -11,6 +11,14 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 ## Usage with callback (async)
 
 ```
+    let Dhondt = require('dhondt-calculator');
+    let votes = [30,3,9],
+        names = ['A','B','C'],
+        options = {
+            mandates: 3,
+            blankVotes: 1,
+            percentage: 2.6
+        };
 	Dhondt.computeWithCallback(votes,names,options,(error,result) => {
 		console.log(error,result);
 	});
