@@ -1,4 +1,5 @@
 # dhondt-calculator
+
 Simple NodeJS module to calculate mandates using D'Hondt method.
 
 ## Install
@@ -7,12 +8,20 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 	$ npm install dhondt-calculator --save
 ```
 
-## Usage
+## Usage with callback (async)
+
+```
+	Dhondt.computeWithCallback(votes,names,options,(error,result) => {
+		console.log(error,result);
+	});
+```
+
+## Usage without callback (sync)
 
 ```
 	let Dhondt = require('dhondt-calculator');
 	let votes = [30,3,9],
-		names = ['A','B','C'];
+		names = ['A','B','C'],
 		options = {
 			mandates: 3,
 			blankVotes: 1,
@@ -47,8 +56,11 @@ If all went fine with the above example, it outputs:
  		parties: { A: 3, B: 0, C: 0 } 
  	}
 ```
+
 Else:
 
 ```
 	An error realated to wrong params.
 ```
+
+

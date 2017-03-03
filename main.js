@@ -16,6 +16,12 @@
         }
     };
 
+    const computeWithCallback = (votes,names,options,done) => {
+        let error = checkParams(votes,names,options), result;
+        result = calculateSeats(votes, names, options.mandates, options.blankVotes, options.percentage);
+        done(error,result);
+    }
+
     const checkParams = (votes,names,options) => {
         if(!(votes.constructor.toString().indexOf("Array") > -1) || !(names.constructor.toString().indexOf("Array") > -1)) return new Error('Wrong params');
         if(votes.length !== names.length) return new Error('votes.length must to be equal to names.length');
@@ -92,6 +98,7 @@
     }
 
     module.exports = {
-        compute: compute
+        compute: compute,
+        computeWithCallback: computeWithCallback
     };
 })();
