@@ -12,6 +12,7 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 
 ```
     let Dhondt = require('dhondt-calculator');
+    
     let votes = [30,3,9],
         names = ['A','B','C'],
         options = {
@@ -19,6 +20,7 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
             blankVotes: 1,
             percentage: 2.6
         };
+        
 	Dhondt.computeWithCallback(votes,names,options,(error,result) => {
 		console.log(error,result);
 	});
@@ -28,6 +30,7 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 
 ```
 	let Dhondt = require('dhondt-calculator');
+	
 	let votes = [30,3,9],
 		names = ['A','B','C'],
 		options = {
@@ -35,7 +38,9 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 			blankVotes: 1,
 			percentage: 2.6
 		};
+		
 	let result = Dhondt.compute(votes,names,options);
+	
 	console.log(result);
 ```
 
@@ -55,7 +60,7 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 
 ### Output
 
-If all went fine with the above example, it outputs:
+* If all went fine with the above example, it outputs:
 
 ```
 	{
@@ -65,7 +70,7 @@ If all went fine with the above example, it outputs:
  	}
 ```
 
-Else:
+* else:
 
 ```
 	An error realated to wrong params.
