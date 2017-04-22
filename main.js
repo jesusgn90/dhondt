@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 'use strict';
-
+const Q = require('q');
 /**
  * D'hondt
  * @module dhondt-calculator
@@ -121,11 +121,24 @@
         done(error, result);
     };
 
+    const computeWithPromise = (votes,names,options) => {
+        let promise = Q.defer();
+        let error = checkParams(votes, names, options), result;
+        if(error){
+            promise.reject(error);
+        }else {
+            result = calculateSeats(votes, names, options.mandates, options.blankVotes, options.percentage);
+            promise.resolve(result);
+        }
+        return promise.promise;
+    };
+
 
 
     module.exports = {
         compute,
-        computeWithCallback
+        computeWithCallback,
+        computeWithPromise
     };
 
 }

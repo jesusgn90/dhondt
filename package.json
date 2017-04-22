@@ -1,6 +1,6 @@
 {
   "name": "dhondt-calculator",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Simple module to calculate mandates using D'Hondt method.",
   "main": "main.js",
   "scripts": {
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/jesusgn90/dhondt/issues"
   },
-  "homepage": "https://github.com/jesusgn90/dhondt#readme"
+  "homepage": "https://github.com/jesusgn90/dhondt#readme",
+  "dependencies": {
+    "q": "^1.5.0"
+  }
 }
