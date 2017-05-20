@@ -2,17 +2,29 @@
 
 Simple NodeJS module to calculate mandates using D'Hondt method.
 
+# IMPORTANT CHANGE SINCE v1.0.8 AND ABOVE
+
+- Since v 1.0.8 was released, Dhondt works slightly different.
+- Now, it uses ES6 class paradigm.
+    - Now you must to create an instance.
+- See details in this readme.
+- Sorry about ES6 haters, but I love it!
+
 ## Install
 
 ```
 	$ npm install dhondt-calculator --save
 ```
 
-## Usage with callback (async)
+## Create an instance
 
 ```
-    let Dhondt = require('dhondt-calculator');
-    
+    /* jshint esversion: 6 */
+
+    /** This is the class require. */
+    const DhontCalculator = require('dhondt-calculator');
+
+    /** Some test params. */
     let votes = [30,3,9],
         names = ['A','B','C'],
         options = {
@@ -20,54 +32,54 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
             blankVotes: 1,
             percentage: 2.6
         };
-        
-	Dhondt.computeWithCallback(votes,names,options,(error,result) => {
-		console.log(error,result);
+
+    /** This is the instance. */
+    const DhondtInstance = new DhontCalculator(votes,names,options);
+
+```
+
+
+## Usage with callback (async)
+
+Once you have created the instance, then:
+
+```
+    /* jshint esversion: 6 */
+
+	DhondtInstance.computeWithCallback((err,result) => {
+		if(err){
+		    console.error(err);
+		} else {
+		    console.log(result);
+		}
 	});
 ```
 
 
 ## Usage with promises (async)
 
+Once you have created the instance, then:
+
 ```
-    let Dhondt = require('dhondt-calculator');
+    /* jshint esversion: 6 */
 
-    let votes = [30,3,9],
-        names = ['A','B','C'],
-        options = {
-            mandates: 3,
-            blankVotes: 1,
-            percentage: 2.6
-        };
+	DhondtInstance.computeWithPromise()
+	    .then((result) => console.log(result))
+	    .catch((err) => console.log(err));
 
-	Dhondt.computeWithPromise(votes,names,options)
-	.then((result)=> {
-	    console.log(result);
-	})
-	.catch((err)=> {
-	    console.log(err);
-	});
 ```
 
 ## Usage without callback (sync)
 
 ```
-	let Dhondt = require('dhondt-calculator');
-	
-	let votes = [30,3,9],
-		names = ['A','B','C'],
-		options = {
-			mandates: 3,
-			blankVotes: 1,
-			percentage: 2.6
-		};
+	/* jshint esversion: 6 */
 		
-	let result = Dhondt.compute(votes,names,options);
+	let result = DhondtInstance.compute();
 	
 	console.log(result);
 ```
 
-### Params
+### Constructor Params
 
 * __votes__
 	+ Array of integers.

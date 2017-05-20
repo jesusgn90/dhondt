@@ -1,13 +1,26 @@
 /* jshint esversion: 6 */
-'use strict';
 const Q = require('q');
-/**
- * D'hondt
- * @module dhondt-calculator
- */
-{
 
-    const calculateTotalVotes = (votes, blankVotes) => {
+class Dhondt {
+    /**
+     * Class constructor.
+     * @param votes
+     * @param names
+     * @param options
+     */
+    constructor(votes, names, options) {
+        this.votes = votes;
+        this.names = names;
+        this.options = options;
+    }
+
+    /**
+     *
+     * @param votes
+     * @param blankVotes
+     * @return {Number}
+     */
+    calculateTotalVotes(votes, blankVotes) {
         let total = parseInt(blankVotes);
 
         for (let vote of votes) {
@@ -15,9 +28,19 @@ const Q = require('q');
         }
 
         return total;
-    };
+    }
 
-    const validateParties = (numberOfParties, minNumberOfVotes, votes, names, validatedVotes, validatedNames) => {
+    /**
+     *
+     * @param numberOfParties
+     * @param minNumberOfVotes
+     * @param votes
+     * @param names
+     * @param validatedVotes
+     * @param validatedNames
+     * @return {number}
+     */
+    validateParties(numberOfParties, minNumberOfVotes, votes, names, validatedVotes, validatedNames) {
         let numberOfPartiesValidated = 0;
 
         for (let i = 0; i < numberOfParties; ++i) {
@@ -29,116 +52,157 @@ const Q = require('q');
         }
 
         return numberOfPartiesValidated;
-    };
+    }
 
-    const newSeat = (votos, esc, num_par) => {
+    /**
+     *
+     * @param votes
+     * @param esc
+     * @param num_par
+     * @return {number}
+     */
+    newSeat(votes, esc, num_par) {
 
         let imax = 0, ct, max = 0;
 
         for (ct = 0; ct < num_par; ++ct) {
-            if (max < (votos[ct] / (esc[ct] + 1))) {
-                max = votos[ct] / (esc[ct] + 1);
+            if (max < (votes[ct] / (esc[ct] + 1))) {
+                max = votes[ct] / (esc[ct] + 1);
                 imax = ct;
             }
         }
 
         return imax;
-    };
+    }
 
-    const fillSeats = (mandates, seats, validatedVotes, numberOfPartiesValidated) => {
+    /**
+     *
+     * @param mandates
+     * @param seats
+     * @param validatedVotes
+     * @param numberOfPartiesValidated
+     * @return {Array}
+     */
+    fillSeats(mandates, seats, validatedVotes, numberOfPartiesValidated) {
         let table = [];
 
         for (let i = 0; i < mandates; ++i) {
-            seats[newSeat(validatedVotes, seats, numberOfPartiesValidated)]++;
+            seats[this.newSeat(validatedVotes, seats, numberOfPartiesValidated)]++;
             table.push(seats.slice());
         }
 
         return table;
-    };
+    }
 
-    const fillPartiesResult = (numberOfPartiesValidated, result, validatedNames, seats) => {
+    /**
+     *
+     * @param numberOfPartiesValidated
+     * @param result
+     * @param validatedNames
+     * @param seats
+     */
+    fillPartiesResult(numberOfPartiesValidated, result, validatedNames, seats) {
         for (let i = 0; i < numberOfPartiesValidated; ++i) {
             result.parties[validatedNames[i]] = seats[i];
         }
-    };
+    }
 
-    const fillResultVar = (numberOfVotes, minNumberOfVotes) => {
+    /**
+     *
+     * @param numberOfVotes
+     * @param minNumberOfVotes
+     * @return {{numberOfVotes: *, minNumberOfVotes: *, parties: {}}}
+     */
+    fillResultVar(numberOfVotes, minNumberOfVotes) {
         return {
             numberOfVotes: numberOfVotes,
             minNumberOfVotes: minNumberOfVotes,
             parties: {}
         };
-    };
+    }
 
-    const calculateSeats = (votes, names, mandates, blankVotes, percentage) => {
-        let numberOfParties = votes.length,
-            numberOfVotes = calculateTotalVotes(votes, blankVotes),
-            minNumberOfVotes = Math.ceil(numberOfVotes * percentage / 100),
-            result = fillResultVar(numberOfVotes, minNumberOfVotes),
+    /**
+     *
+     * @return {{numberOfVotes: *, minNumberOfVotes: *, parties: {}}}
+     */
+    calculateSeats() {
+        let numberOfParties = this.votes.length,
+            numberOfVotes = this.calculateTotalVotes(this.votes, this.options.blankVotes),
+            minNumberOfVotes = Math.ceil(numberOfVotes * this.options.percentage / 100),
+            result = this.fillResultVar(numberOfVotes, minNumberOfVotes),
             seats, numberOfPartiesValidated, validatedVotes = [], validatedNames = [];
 
-        numberOfPartiesValidated = validateParties(numberOfParties, minNumberOfVotes, votes, names, validatedVotes, validatedNames);
+        numberOfPartiesValidated = this.validateParties(numberOfParties, minNumberOfVotes, this.votes, this.names, validatedVotes, validatedNames);
 
         seats = new Array(numberOfPartiesValidated).fill(0);
 
-        let table = fillSeats(mandates, seats, validatedVotes, numberOfPartiesValidated);
+        let table = this.fillSeats(this.options.mandates, seats, validatedVotes, numberOfPartiesValidated);
 
         console.log(table);
 
-        fillPartiesResult(numberOfPartiesValidated, result, validatedNames, seats);
+        this.fillPartiesResult(numberOfPartiesValidated, result, validatedNames, seats);
 
         return result;
-    };
+    }
 
-    const checkParams = (votes, names, options) => {
-        if (!(votes.constructor.toString().indexOf('Array') > -1) || !(names.constructor.toString().indexOf("Array") > -1)) {
+    /**
+     *
+     * @return {*}
+     */
+    checkParams() {
+        if (!(this.votes.constructor.toString().includes('Array')) ||
+            !(this.names.constructor.toString().includes('Array'))) {
             return new Error('Wrong params');
         }
 
-        if (votes.length !== names.length) {
+        if (this.votes.length !== this.names.length) {
             return new Error('votes.length must to be equal to names.length');
         }
 
-        if (typeof options !== 'object') {
+        if (typeof this.options !== 'object') {
             return new Error('Wrong options');
         }
 
         return false;
-    };
+    }
 
-    const compute = (votes, names, options) => {
-        let error = checkParams(votes, names, options);
+    /**
+     *
+     * @return {{numberOfVotes: *, minNumberOfVotes: *, parties: {}}}
+     */
+    compute() {
+        let error = this.checkParams();
         if (!error) {
-            return calculateSeats(votes, names, options.mandates, options.blankVotes, options.percentage);
+            return this.calculateSeats();
         } else {
             console.log(error);
         }
-    };
+    }
 
-    const computeWithCallback = (votes, names, options, done) => {
-        let error = checkParams(votes, names, options), result;
-        result = calculateSeats(votes, names, options.mandates, options.blankVotes, options.percentage);
+    /**
+     *
+     * @param done
+     */
+    computeWithCallback(done) {
+        let error = this.checkParams(), result;
+        result = this.calculateSeats();
         done(error, result);
-    };
+    }
 
-    const computeWithPromise = (votes,names,options) => {
+    /**
+     *
+     * @return {*|promise}
+     */
+    computeWithPromise() {
         let promise = Q.defer();
-        let error = checkParams(votes, names, options), result;
-        if(error){
+        let error = this.checkParams(), result;
+        if (error) {
             promise.reject(error);
-        }else {
-            result = calculateSeats(votes, names, options.mandates, options.blankVotes, options.percentage);
+        } else {
+            result = this.calculateSeats();
             promise.resolve(result);
         }
         return promise.promise;
-    };
-
-
-
-    module.exports = {
-        compute,
-        computeWithCallback,
-        computeWithPromise
-    };
-
+    }
 }
+module.exports = Dhondt;
