@@ -1,8 +1,10 @@
 # dhondt-calculator
 
+[https://img.shields.io/npm/v/dhondt-calculator.svg](https://www.npmjs.com/package/dhondt-calculator)
+
 Simple NodeJS module to calculate mandates using D'Hondt method.
 
-# IMPORTANT CHANGE SINCE v1.0.8 AND ABOVE
+## IMPORTANT CHANGE SINCE v1.0.8 AND ABOVE
 
 - Since v 1.0.8 was released, Dhondt works slightly different.
 - Now, it uses ES6 class paradigm.
