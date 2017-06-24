@@ -9,9 +9,21 @@ class Dhondt {
      * @param options
      */
     constructor(votes, names, options) {
-        this.votes = votes;
-        this.names = names;
-        this.options = options;
+        this._votes = votes;
+        this._names = names;
+        this._options = options;
+    }
+
+    get votes(){
+        return this._votes;
+    }
+
+    get names(){
+        return this._names;
+    }
+
+    get options(){
+        return this._options;
     }
 
     /**
@@ -126,19 +138,17 @@ class Dhondt {
      * @return {{numberOfVotes: *, minNumberOfVotes: *, parties: {}}}
      */
     calculateSeats() {
-        let numberOfParties = this.votes.length,
-            numberOfVotes = this.calculateTotalVotes(this.votes, this.options.blankVotes),
-            minNumberOfVotes = Math.ceil(numberOfVotes * this.options.percentage / 100),
-            result = this.fillResultVar(numberOfVotes, minNumberOfVotes),
-            seats, numberOfPartiesValidated, validatedVotes = [], validatedNames = [];
+        let numberOfParties = this.votes.length;
+        let numberOfVotes = this.calculateTotalVotes(this.votes, this.options.blankVotes);
+        let minNumberOfVotes = Math.ceil(numberOfVotes * this.options.percentage / 100);
+        let result = this.fillResultVar(numberOfVotes, minNumberOfVotes);
+        let seats, numberOfPartiesValidated, validatedVotes = [], validatedNames = [];
 
         numberOfPartiesValidated = this.validateParties(numberOfParties, minNumberOfVotes, this.votes, this.names, validatedVotes, validatedNames);
 
         seats = new Array(numberOfPartiesValidated).fill(0);
 
         let table = this.fillSeats(this.options.mandates, seats, validatedVotes, numberOfPartiesValidated);
-
-        console.log(table);
 
         this.fillPartiesResult(numberOfPartiesValidated, result, validatedNames, seats);
 
@@ -162,7 +172,6 @@ class Dhondt {
         if (typeof this.options !== 'object') {
             return new Error('Wrong options');
         }
-
         return false;
     }
 
