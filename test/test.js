@@ -7,7 +7,8 @@ const options = {
 	mandates: 7
 };
 const parties = ['A','B','C','D','E']
-const votes = [340000,280000,160000,60000,15000];
+const votes = [340000, 280000, 160000, 60000, 15000];
+
 const validResult = { 
 	numberOfVotes: 855000,
 	minNumberOfVotes: 25650,
@@ -42,5 +43,16 @@ describe('Main calculate function',() => {
 		.catch(done);
 	});
 	
-	
+	it('Async/Await mode (I)',async () => {
+		let result = await d.computeWithPromise();
+		assert.deepEqual(result,validResult);
+	});
+
+	it('Async/Await mode (II)',() => {
+		(async () => {
+			let result = await d.computeWithPromise();
+			assert.deepEqual(result,validResult);
+		})();
+	});
+
 });

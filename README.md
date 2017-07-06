@@ -41,14 +41,28 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 
 ```
 
+## Usage with async+await (async)
+
+Once you have created the instance, then:
+
+```
+    (async () => {
+        try{
+            let result = await DhondtInstance.computeWithPromise();
+            console.log(result);
+        } catch (err) {
+            console.error(err);
+        }
+    })();
+```
+
+_Only ES7, Node 8+_
 
 ## Usage with callback (async)
 
 Once you have created the instance, then:
 
 ```
-    /* jshint esversion: 6 */
-
 	DhondtInstance.computeWithCallback((err,result) => {
 		if(err){
 		    console.error(err);
@@ -64,19 +78,14 @@ Once you have created the instance, then:
 Once you have created the instance, then:
 
 ```
-    /* jshint esversion: 6 */
-
 	DhondtInstance.computeWithPromise()
 	    .then((result) => console.log(result))
 	    .catch((err) => console.log(err));
-
 ```
 
 ## Usage without callback (sync)
 
 ```
-	/* jshint esversion: 6 */
-		
 	let result = DhondtInstance.compute();
 	
 	console.log(result);
