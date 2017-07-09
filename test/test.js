@@ -43,15 +43,12 @@ describe('Main calculate function',() => {
 		.catch(done);
 	});
 	
-	it('Async/Await mode (I)',async () => {
-		let result = await d.computeWithPromise();
-		assert.deepEqual(result,validResult);
-	});
 
-	it('Async/Await mode (II)',() => {
+	it('Async/Await mode',(done) => {
 		(async () => {
 			let result = await d.computeWithPromise();
 			assert.deepEqual(result,validResult);
+			done();
 		})();
 	});
 
