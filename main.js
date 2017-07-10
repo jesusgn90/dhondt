@@ -1,4 +1,3 @@
-/* jshint esversion: 6 */
 const Q = require('q');
 
 class Dhondt {
@@ -9,20 +8,20 @@ class Dhondt {
      * @param options
      */
     constructor(votes, names, options) {
-        this._votes = votes;
-        this._names = names;
+        this._votes   = votes;
+        this._names   = names;
         this._options = options;
     }
 
-    get votes(){
+    get votes() {
         return this._votes;
     }
 
-    get names(){
+    get names() {
         return this._names;
     }
 
-    get options(){
+    get options() {
         return this._options;
     }
 
@@ -36,7 +35,7 @@ class Dhondt {
         let total = parseInt(blankVotes);
 
         for (let vote of votes) {
-            total = parseInt(vote) + total;
+            total += parseInt(vote);
         }
 
         return total;
@@ -75,11 +74,12 @@ class Dhondt {
      */
     newSeat(votes, esc, num_par) {
 
-        let imax = 0, ct, max = 0;
+        let imax = 0;
+        let max  = 0;
 
-        for (ct = 0; ct < num_par; ++ct) {
+        for (let ct = 0; ct < num_par; ++ct) {
             if (max < (votes[ct] / (esc[ct] + 1))) {
-                max = votes[ct] / (esc[ct] + 1);
+                max  = votes[ct] / (esc[ct] + 1);
                 imax = ct;
             }
         }
@@ -93,17 +93,11 @@ class Dhondt {
      * @param seats
      * @param validatedVotes
      * @param numberOfPartiesValidated
-     * @return {Array}
      */
     fillSeats(mandates, seats, validatedVotes, numberOfPartiesValidated) {
-        let table = [];
-
         for (let i = 0; i < mandates; ++i) {
             seats[this.newSeat(validatedVotes, seats, numberOfPartiesValidated)]++;
-            table.push(seats.slice());
         }
-
-        return table;
     }
 
     /**
@@ -127,9 +121,9 @@ class Dhondt {
      */
     fillResultVar(numberOfVotes, minNumberOfVotes) {
         return {
-            numberOfVotes: numberOfVotes,
+            numberOfVotes   : numberOfVotes,
             minNumberOfVotes: minNumberOfVotes,
-            parties: {}
+            parties         : {}
         };
     }
 
@@ -138,18 +132,16 @@ class Dhondt {
      * @return {{numberOfVotes: *, minNumberOfVotes: *, parties: {}}}
      */
     calculateSeats() {
-        let numberOfParties = this.votes.length;
-        let numberOfVotes = this.calculateTotalVotes(this.votes, this.options.blankVotes);
-        let minNumberOfVotes = Math.ceil(numberOfVotes * this.options.percentage / 100);
-        let result = this.fillResultVar(numberOfVotes, minNumberOfVotes);
-        let seats, numberOfPartiesValidated, validatedVotes = [], validatedNames = [];
+        let numberOfParties          = this.votes.length;
+        let numberOfVotes            = this.calculateTotalVotes(this.votes, this.options.blankVotes);
+        let minNumberOfVotes         = Math.ceil(numberOfVotes * this.options.percentage / 100);
+        let result                   = this.fillResultVar(numberOfVotes, minNumberOfVotes);
+        let validatedVotes           = [];
+        let validatedNames           = [];
+        let numberOfPartiesValidated = this.validateParties(numberOfParties, minNumberOfVotes, this.votes, this.names, validatedVotes, validatedNames);
+        let seats                    = new Array(numberOfPartiesValidated).fill(0);
 
-        numberOfPartiesValidated = this.validateParties(numberOfParties, minNumberOfVotes, this.votes, this.names, validatedVotes, validatedNames);
-
-        seats = new Array(numberOfPartiesValidated).fill(0);
-
-        let table = this.fillSeats(this.options.mandates, seats, validatedVotes, numberOfPartiesValidated);
-
+        this.fillSeats(this.options.mandates, seats, validatedVotes, numberOfPartiesValidated);
         this.fillPartiesResult(numberOfPartiesValidated, result, validatedNames, seats);
 
         return result;
@@ -193,8 +185,8 @@ class Dhondt {
      * @param done
      */
     computeWithCallback(done) {
-        let error = this.checkParams(), result;
-        result = this.calculateSeats();
+        let error  = this.checkParams();
+        let result = this.calculateSeats();
         done(error, result);
     }
 
@@ -204,11 +196,11 @@ class Dhondt {
      */
     computeWithPromise() {
         let promise = Q.defer();
-        let error = this.checkParams(), result;
+        let error   = this.checkParams();
         if (error) {
             promise.reject(error);
         } else {
-            result = this.calculateSeats();
+            let result = this.calculateSeats();
             promise.resolve(result);
         }
         return promise.promise;

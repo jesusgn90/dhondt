@@ -21,9 +21,7 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 
 ## Create an instance
 
-```
-    /* jshint esversion: 6 */
-
+```js
     /** This is the class require. */
     const DhontCalculator = require('dhondt-calculator');
 
@@ -45,7 +43,7 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 
 Once you have created the instance, then:
 
-```
+```js
     (async () => {
         try{
             let result = await DhondtInstance.computeWithPromise();
@@ -62,7 +60,7 @@ _Only ES7, Node 8+_
 
 Once you have created the instance, then:
 
-```
+```js
 	DhondtInstance.computeWithCallback((err,result) => {
 		if(err){
 		    console.error(err);
@@ -77,7 +75,7 @@ Once you have created the instance, then:
 
 Once you have created the instance, then:
 
-```
+```js
 	DhondtInstance.computeWithPromise()
 	    .then((result) => console.log(result))
 	    .catch((err) => console.log(err));
@@ -85,7 +83,7 @@ Once you have created the instance, then:
 
 ## Usage without callback (sync)
 
-```
+```js
 	let result = DhondtInstance.compute();
 	
 	console.log(result);
@@ -109,7 +107,7 @@ Once you have created the instance, then:
 
 * If all went fine with the above example, it outputs:
 
-```
+```js
 	{
 		numberOfVotes: 43,
     	minNumberOfVotes: 2,
@@ -119,7 +117,7 @@ Once you have created the instance, then:
 
 * else:
 
-```
+```js
 	An error realated to wrong params.
 ```
 
