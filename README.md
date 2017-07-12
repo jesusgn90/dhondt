@@ -2,6 +2,7 @@
 
 [![https://img.shields.io/npm/v/dhondt-calculator.svg](https://img.shields.io/npm/v/dhondt-calculator.svg)](https://www.npmjs.com/package/dhondt-calculator)
 [![https://img.shields.io/npm/dm/dhondt-calculator.svg](https://img.shields.io/npm/dm/dhondt-calculator.svg)](https://www.npmjs.com/package/dhondt-calculator)
+[![Coverage Status](https://coveralls.io/repos/github/jesusgn90/dhondt/badge.svg?branch=master)](https://coveralls.io/github/jesusgn90/dhondt?branch=master)
 
 Simple NodeJS module to calculate mandates using D'Hondt method.
 
