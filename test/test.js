@@ -35,26 +35,12 @@ describe('Main calculate function', () => {
         });
     });
 
-    it('Promise mode', (done) => {
+    it('Async/Await mode', (done) => {
         d.computeWithPromise()
             .then((result) => {
                 assert.deepEqual(result, validResult);
                 done();
-            })
-            .catch(done);
-    });
-
-
-    it('Async/Await mode', (done) => {
-        (async () => {
-            try {
-                let result = await d.computeWithPromise();
-                assert.deepEqual(result, validResult);
-                done();
-            } catch (err) {
-                done(err);
-            }
-        })();
+            });
     });
 
 });

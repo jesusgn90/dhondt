@@ -1,5 +1,3 @@
-const Q = require('q');
-
 class Dhondt {
     /**
      * Class constructor.
@@ -194,16 +192,17 @@ class Dhondt {
      *
      * @return {*|promise}
      */
-    computeWithPromise() {
-        let promise = Q.defer();
-        let error   = this.checkParams();
-        if (error) {
-            promise.reject(error);
-        } else {
-            let result = this.calculateSeats();
-            promise.resolve(result);
+    async computeWithPromise() {
+        try{
+            let error = this.checkParams();
+            if(error){
+                throw Error(error);
+            } else {
+                return await this.calculateSeats();
+            }
+        }catch(err){
+            throw err;
         }
-        return promise.promise;
     }
 }
 module.exports = Dhondt;
