@@ -1,4 +1,4 @@
-# dhondt-calculator
+# Dhondt calculator 1.1.4
 
 [![https://img.shields.io/npm/v/dhondt-calculator.svg](https://img.shields.io/npm/v/dhondt-calculator.svg)](https://www.npmjs.com/package/dhondt-calculator)
 [![https://img.shields.io/npm/dm/dhondt-calculator.svg](https://img.shields.io/npm/dm/dhondt-calculator.svg)](https://www.npmjs.com/package/dhondt-calculator)
@@ -27,7 +27,7 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
     const DhontCalculator = require('dhondt-calculator');
 
     /** Some test params. */
-    let votes = [30,3,9],
+    const votes = [30,3,9],
         names = ['A','B','C'],
         options = {
             mandates: 3,
@@ -45,29 +45,17 @@ Simple NodeJS module to calculate mandates using D'Hondt method.
 Once you have created the instance, then:
 
 ```js
-    (async () => {
-        try{
-            let result = await DhondtInstance.computeWithPromise();
-            console.log(result);
-        } catch (err) {
-            console.error(err);
-        }
-    })();
-```
-
-_Only ES7, Node 8+_
+    const result = await DhondtInstance.computeWithPromise();
+ ```
 
 ## Usage with callback (async)
 
 Once you have created the instance, then:
 
 ```js
-	DhondtInstance.computeWithCallback((err,result) => {
-		if(err){
-		    console.error(err);
-		} else {
-		    console.log(result);
-		}
+	DhondtInstance
+	.computeWithCallback((err,result) => {
+
 	});
 ```
 
@@ -77,17 +65,16 @@ Once you have created the instance, then:
 Once you have created the instance, then:
 
 ```js
-	DhondtInstance.computeWithPromise()
-	    .then((result) => console.log(result))
-	    .catch((err) => console.log(err));
+	DhondtInstance
+	.computeWithPromise()
+	.then(result => { })
+	.catch(error => { });
 ```
 
 ## Usage without callback (sync)
 
 ```js
-	let result = DhondtInstance.compute();
-	
-	console.log(result);
+	const result = DhondtInstance.compute();
 ```
 
 ### Constructor Params
