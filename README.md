@@ -72,9 +72,9 @@ const result = dhondt.compute();
 
 ### Constructor Params
 
-- **votes** + Array of integers. + The votes of each party.
-- **names** + Array of strings. + The names of the parties.
-- **options** + Object with three fields + **mandates** (integer), the mandates to distribute. + **blankVotes** (integer), blank votes. + **percentage** (float), barrier percentage.
+- **votes** `number[]` the votes of each party.
+- **names** `string[]` the names of the parties.
+- **options** `{blankVotes: number, percentage: number, mandates: number}` the constructor options.
 
 ### Output
 
