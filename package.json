@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "Simple module to calculate mandates using the D'Hondt method.",
   "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "pretest": "npm run build",
@@ -10,7 +11,8 @@
     "prepublishOnly": "npm run build && npm test"
   },
   "files": [
-    "dist/index.js"
+    "dist/index.js",
+    "dist/index.d.ts"
   ],
   "repository": {
     "type": "git",
@@ -21,7 +23,7 @@
     "dhondt",
     "math",
     "mandates",
-    "ellections"
+    "elections"
   ],
   "author": "Jesús Ángel González Novez",
   "license": "GPL-3.0",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@types/node": "latest",
     "@types/jest": "latest",
-    "jest": "latest"
+    "jest": "latest",
+    "typescript": "latest"
   }
 }
