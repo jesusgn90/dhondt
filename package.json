@@ -34,7 +34,6 @@
   "devDependencies": {
     "@types/node": "latest",
     "@types/jest": "latest",
-    "jest": "latest",
-    "typescript": "latest"
+    "jest": "latest"
   }
 }
