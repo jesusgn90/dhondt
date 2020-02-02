@@ -9,15 +9,14 @@ Node.js module to calculate mandates using the D'Hondt method.
 ## Install
 
 ```sh
-$ npm install dhondt-calculator@latest --save
+$ yarn add dhondt-calculator@latest
 ```
 
 ## Test
 
 ```sh
-$ sudo npm install -g typescript@latest
-$ npm install
-$ npm test
+$ yarn install
+$ yarn test
 ```
 
 ## Create an instance
