@@ -1,6 +1,6 @@
 # D'Hondt calculator
 
-[![build](https://travis-ci.org/jesusgn90/dhondt.svg?branch=master)](https://travis-ci.org/jesusgn90/dhondt)
+[![CircleCI](https://circleci.com/gh/jesusgn90/dhondt/tree/master.svg?style=svg)](https://circleci.com/gh/jesusgn90/dhondt/tree/master)
 [![https://img.shields.io/npm/v/dhondt-calculator.svg](https://img.shields.io/npm/v/dhondt-calculator.svg)](https://www.npmjs.com/package/dhondt-calculator)
 [![https://img.shields.io/npm/dm/dhondt-calculator.svg](https://img.shields.io/npm/dm/dhondt-calculator.svg)](https://www.npmjs.com/package/dhondt-calculator)
 
